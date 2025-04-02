@@ -11,18 +11,19 @@
    Open Command Prompt and run:
    pip install websockets pyaudio numpy
 
-3. Run the Mic Server:
+4. Run the Mic Server:
    Double-click "start_server_vb.bat"
+   (Make sure the files are in the correct area)
 
-4. Start the Web Server:
+6. Start the Web Server:
    Double-click "start_http.bat"
 
-5. On your iPhone:
+7. On your iPhone:
    - Make sure you're on the same Wi-Fi as your PC
-   - Open Safari and go to: http://192.168.1.87:8080/mic.html
+   - Open Safari and go to: http://(Your IP):8080/mic.html
    - Allow mic access
 
-6. In your app (Zoom, Discord, OBS):
+8. In your app (Zoom, Discord, OBS):
    - Set your microphone input to "VB-Cable Input"
 
 Enjoy your wireless mic! 🎤📱💻
