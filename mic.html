@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mic Streamer</title>
+</head>
+<body>
+  <h1>🎤 Streaming iPhone Mic to PC</h1>
+  <script>
+    const socket = new WebSocket("ws://192.168.1.100:8000");
+
+    socket.onopen = () => {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        const audioCtx = new AudioContext();
+        const source = audioCtx.createMediaStreamSource(stream);
+        const processor = audioCtx.createScriptProcessor(1024, 1, 1);
+
+        source.connect(processor);
+        processor.connect(audioCtx.destination);
+
+        processor.onaudioprocess = e => {
+          const input = e.inputBuffer.getChannelData(0);
+          const buffer = new Int16Array(input.length);
+          for (let i = 0; i < input.length; i++) {
+            buffer[i] = input[i] * 32767;
+          }
+          socket.send(buffer.buffer);
+        };
+      });
+    };
+  </script>
+</body>
+</html>
